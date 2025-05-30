@@ -26,8 +26,8 @@
 
 #### Screenshots
 
-<img src="/screenshots/screenshot1-1.png" style="width:40%; height:40%;">
-<img src="/screenshots/screenshot1-2.png" style="width:40%; height:40%;">
+<img src="/screenshots/screenshot1-1.png" style="width:35%; height:35%;">
+<img src="/screenshots/screenshot1-2.png" style="width:35%; height:35%;">
 
 ### 2. run app
 
@@ -82,15 +82,18 @@ I organized the project as follows:
 
 #### Short screen recording
 
-![App Demo](/screenshots/demo.gif)
+[Watch App Demo Video](https://drive.google.com/file/d/10gY1nC19iTkVvb7h1Z_SypJW-CtSf9aX/view?usp=drive_link)
 
 #### Screenshots
 
-<img src="/screenshots/screenshot2.png" style="width:40%; height:40%;">
-<img src="/screenshots/screenshot3.png" style="width:40%; height:40%;">
-<img src="/screenshots/screenshot4.png" style="width:40%; height:40%;">
-<img src="/screenshots/screenshot5.png" style="width:40%; height:40%;">
-<img src="/screenshots/screenshot6.png" style="width:40%; height:40%;">
+<img src="/screenshots/screenshot2.png" style="width:35%; height:35%;">
+<img src="/screenshots/screenshot3.png" style="width:35%; height:35%;">
+<img src="/screenshots/screenshot4.png" style="width:35%; height:35%;">
+<img src="/screenshots/screenshot5.png" style="width:35%; height:35%;">
+<img src="/screenshots/screenshot6.png" style="width:35%; height:35%;">
+
+Start/end markers can be clicked to display the address or the place name the user entered as title.
+<img src="/screenshots/screenshot7.png" style="width:35%; height:35%;">
 
 ---
 
@@ -102,7 +105,9 @@ To evolve EcoRoute from a prototype into a production-grade application, several
 
 - Replace the static routes.json mock data with a real backend API that dynamically generates routes based on live geolocation and transportation data.
 
-- Replace the two dummy hardcoded coordinates (`from` and `to`) with real coordinates resolved from user-entered addresses or place names using a geocoding service.
+- Replace the two dummy hardcoded coordinates (`from` and `to`) with two real coordinates resolved from user-entered addresses or place names using a geocoding service (like Mapbox or Google Maps). (note: the function of converting user-entered strings (addresses or place names) into latitude and longitude has been impletmented by Mapbox API, but the access token needs to be aquired before going ahead)
+
+- Relace the simple polyline between `from` and `to` to a multiple-segment polyline by fetching real route using a geocoding service. (note: the function has been implemented by Mapbox API, but the access token needs to be aquired before going ahead)
 
 ### 2. caching
 

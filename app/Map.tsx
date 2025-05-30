@@ -102,7 +102,8 @@ export default function MapScreen() {
   useEffect(() => {
     if (!start || !end) return;
 
-    // Fetch real route for drawing multi-segment polyline, for this current test, not use
+    // Fetch real route for drawing multi-segment polyline
+    // for this current test, not use
     // (async () => {
     //   const token = "YOUR_MAPBOX_TOKEN"; //to be replaced by real token
     //   const coords = `${start.longitude},${start.latitude};${end.longitude},${end.latitude}`;
@@ -162,7 +163,7 @@ export default function MapScreen() {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        initialRegion={{
+        region={{
           latitude: (start.latitude + end.latitude) / 2,
           longitude: (start.longitude + end.longitude) / 2,
           latitudeDelta: 0.1,
