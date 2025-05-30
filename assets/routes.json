@@ -1,0 +1,30 @@
+[
+  {
+    "mode": "driving",
+    "distance_km": 12.3,
+    "time_min": 18,
+    "co2_g": 2214,
+    "score": 240.4
+  },
+  {
+    "mode": "bicycling",
+    "distance_km": 12.3,
+    "time_min": 45,
+    "co2_g": 0,
+    "score": 45.0
+  },
+  {
+    "mode": "transit",
+    "distance_km": 12.3,
+    "time_min": 25,
+    "co2_g": 0,
+    "score": 25.0
+  },
+  {
+    "mode": "walking",
+    "distance_km": 12.3,
+    "time_min": 150,
+    "co2_g": 0,
+    "score": 150.0
+  }
+]

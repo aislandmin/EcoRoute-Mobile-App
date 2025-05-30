@@ -1,50 +1,125 @@
-# Welcome to your Expo app 👋
+**Solutions to EcoRoute Mobile App Test**
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Quick Start
 
-## Get started
+### 1. install
 
-1. Install dependencies
+- Choose mobile framework: **React Native (Expo CLI)**
 
-   ```bash
-   npm install
-   ```
+- Start a new project:
 
-2. Start the app
+  `npx create-expo-app EcoRouteMobile`
 
-   ```bash
-   npx expo start
-   ```
+  (note: not to use `npx expo init EcoRouteMobile`, for expo init is not supported in the local CLI, please use npx create-expo-app instead)
 
-In the output, you'll find options to open the app in a
+- Install required packages:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+  `npm install @react-navigation/native axios react-native-maps`
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+  `npm install -g expo-cli`
 
-## Get a fresh project
+  `npx expo install react-native-safe-area-context react-native-screens`
 
-When you're ready, run:
+- Verify the blank app runs on an Android emulator (Android Studio -> Virtual Device Manager):
 
-```bash
-npm run reset-project
+  `npx expo start`
+
+#### Screenshots
+
+<img src="/screenshots/screenshot1-1.png" style="width:40%; height:40%;">
+<img src="/screenshots/screenshot1-2.png" style="width:40%; height:40%;">
+
+### 2. run app
+
+`npx expo start --android`
+
+### 3. start mock server (if used)
+
+No mock server used
+
+---
+
+## Mock Data
+
+### 1. location for routes.json
+
+`/assets/routes.json`
+
+### 2. loading method for routes.json
+
+`/services/routeService.ts`
+
+direct import: `import routes from "@/assets/routes.json";`
+
+---
+
+## Design Decisions
+
+### 1. framework choices
+
+- Mobile framework choice: **React Native (Expo CLI)**
+
+- I chose **React Native with Expo** for cross-platform mobile development, enabling rapid iteration and compatibility across Android and iOS. The app is built using **TypeScript** to enhance type safety and developer productivity.
+
+### 2. libraries
+
+- `expo-router`: Enables file-based routing on top of React Navigation, simplifying navigation logic and aligning routes with the file system structure.
+- `react-native`: Core framework for building native mobile apps.
+- `react`: JavaScript library for building user interfaces; provides the component-based architecture used throughout the app.
+- `react-native-maps`: Used to display interactive maps and geolocation features, such as source and destination markers.
+- `@expo/vector-icons`: Offers a large collection of customizable vector icons that integrate seamlessly with React Native components.
+
+### 3. structure
+
+I organized the project as follows:
+
+```text
+/app          # Input(i.e. index), Results, Map
+/assets       # routes.json, icons
+/components   # reusable UI widgets
+/services     # route fetching logic
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+#### Short screen recording
 
-## Learn more
+![App Demo](/screenshots/demo.gif)
 
-To learn more about developing your project with Expo, look at the following resources:
+#### Screenshots
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+<img src="/screenshots/screenshot2.png" style="width:40%; height:40%;">
+<img src="/screenshots/screenshot3.png" style="width:40%; height:40%;">
+<img src="/screenshots/screenshot4.png" style="width:40%; height:40%;">
+<img src="/screenshots/screenshot5.png" style="width:40%; height:40%;">
+<img src="/screenshots/screenshot6.png" style="width:40%; height:40%;">
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## Next Steps - roadmap to production-grade app
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+To evolve EcoRoute from a prototype into a production-grade application, several enhancements are required:
+
+### 1. real API
+
+- Replace the static routes.json mock data with a real backend API that dynamically generates routes based on live geolocation and transportation data.
+
+- Replace the two dummy hardcoded coordinates (`from` and `to`) with real coordinates resolved from user-entered addresses or place names using a geocoding service.
+
+### 2. caching
+
+- Implement local caching using libraries like react-query or AsyncStorage. This will minimize redundant API calls and enable offline access to previously viewed routes, improving performance and user experience.
+
+### 3. auth
+
+- Introduce authentication and user profiles using OAuth or Firebase Auth. This will allow features such as saving favorite routes, personal preferences, and usage analytics, improving security and personalization.
+
+### 4. CI/CD
+
+- Set up CI/CD pipelines using GitHub Actions or Expo EAS for automated testing, builds, and deployments. Integrate monitoring tools like Sentry or Firebase Crashlytics for real-time error tracking.
+
+### 5. UI/UX
+
+- Refine the UI for accessibility and responsiveness. Optimize for low-end devices, and conduct usability testing to ensure a smooth and inclusive user experience across platforms.
+
+---
+
+**End of Solutions to EcoRoute Mobile App Test**
