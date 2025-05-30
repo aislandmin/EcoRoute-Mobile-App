@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import MapView, { Marker, Polyline } from "react-native-maps";
 
 type Params = {
   mode?: string;
@@ -19,10 +20,6 @@ type Params = {
 export default function MapScreen() {
   const router = useRouter();
   const { mode, from: fromAddr, to: toAddr } = useLocalSearchParams<Params>();
-
-  const [MapView, setMapView] = useState<any>(null);
-  const [Marker, setMarker] = useState<any>(null);
-  const [Polyline, setPolyline] = useState<any>(null);
 
   const [start, setStart] = useState<{
     latitude: number;
@@ -36,22 +33,11 @@ export default function MapScreen() {
     { latitude: number; longitude: number }[] | null
   >(null);
 
-  // 1) Dynamically import react-native-maps on native only
-  useEffect(() => {
-    if (Platform.OS !== "web") {
-      import("react-native-maps").then((Maps) => {
-        setMapView(() => Maps.default);
-        setMarker(() => Maps.Marker);
-        setPolyline(() => Maps.Polyline);
-      });
-    }
-  }, []);
-
-  // Convert user-entered strings (addresses or place names) into latitude and longitude using Mapbox Geocoding API.
-  // For this current test, not use
+  // 1) Helper Function: Convert user-entered strings (addresses or place names)
+  // into latitude and longitude using Mapbox Geocoding API.
   // async function getCoordinates(
   //   query: string
-  // ): Promise<{ lat: number; lng: number } | null> {
+  // ): Promise<{ latitude: number; longitude: number } | null> {
   //   const token = "YOUR_MAPBOX_TOKEN"; //to be replaced by real token
   //   try {
   //     const response = await fetch(
@@ -63,7 +49,7 @@ export default function MapScreen() {
 
   //     if (data.features && data.features.length > 0) {
   //       const [lng, lat] = data.features[0].center;
-  //       return { lat, lng };
+  //       return { latitude: lat, longitude: lng };
   //     } else {
   //       console.warn("No location found for query:", query);
   //       return null;
@@ -75,61 +61,56 @@ export default function MapScreen() {
   // }
 
   // 2) Once map loaded, geocode both addresses
-  useEffect(() => {
-    if (!MapView) return;
-
-    // Convert user-entered strings (addresses or place names) into latitude and longitude
-    // (async () => {
-    //   try {
-    //     const s = await getCoordinates(fromAddr);
-    //     const e = await getCoordinates(toAddr);
-    //     setStart(s);
-    //     setEnd(e);
-    //   } catch (err) {
-    //     console.error("Geocoding failed:", err);
-    //   }
-    // })();
-
-    // For this current test, use two dummy coordinates
-    const start = { latitude: 43.6426, longitude: -79.3871 }; //CN Tower
-    const end = { latitude: 43.6465, longitude: -79.4637 }; //High Park
-    setStart(start);
-    setEnd(end);
-  }, [MapView, fromAddr, toAddr]);
+  // useEffect(() => {
+  //   // Convert user-entered strings (addresses or place names) into latitude and longitude
+  //   (async () => {
+  //     try {
+  //       const s = await getCoordinates(fromAddr);
+  //       const e = await getCoordinates(toAddr);
+  //       setStart(s);
+  //       setEnd(e);
+  //     } catch (err) {
+  //       console.error("Geocoding failed:", err);
+  //     }
+  //   })();
+  // }, [fromAddr, toAddr]);
 
   // 3) Once start/end known, fetch real route for drawing multi-segment polyline
   // For this current test, not uses
+  // useEffect(() => {
+  //   if (!start || !end) return;
+  // (async () => {
+  //   const token = "YOUR_MAPBOX_TOKEN"; //to be replaced by real token
+  //   const coords = `${start.longitude},${start.latitude};${end.longitude},${end.latitude}`;
+  //   const url =
+  //     `https://api.mapbox.com/directions/v5/mapbox/driving/` +
+  //     coords +
+  //     `?geometries=geojson&access_token=${token}`;
+
+  //   try {
+  //     const resp = await fetch(url);
+  //     const json = await resp.json();
+  //     const line = json.routes[0].geometry.coordinates; // [ [lng,lat], ... ]
+  //     setRouteCoords(
+  //       line.map(([lng, lat]: [number, number]) => ({
+  //         latitude: lat,
+  //         longitude: lng,
+  //       }))
+  //     );
+  //   } catch (err) {
+  //     console.error("Route fetch failed:", err);
+  //   }
+  // })();
+  // }, [start, end]);
+
+  // 1) 2) 3) - use two dummy coordinates for the current app test
   useEffect(() => {
-    if (!start || !end) return;
-
-    // Fetch real route for drawing multi-segment polyline
-    // for this current test, not use
-    // (async () => {
-    //   const token = "YOUR_MAPBOX_TOKEN"; //to be replaced by real token
-    //   const coords = `${start.longitude},${start.latitude};${end.longitude},${end.latitude}`;
-    //   const url =
-    //     `https://api.mapbox.com/directions/v5/mapbox/driving/` +
-    //     coords +
-    //     `?geometries=geojson&access_token=${token}`;
-
-    //   try {
-    //     const resp = await fetch(url);
-    //     const json = await resp.json();
-    //     const line = json.routes[0].geometry.coordinates; // [ [lng,lat], ... ]
-    //     setRouteCoords(
-    //       line.map(([lng, lat]: [number, number]) => ({
-    //         latitude: lat,
-    //         longitude: lng,
-    //       }))
-    //     );
-    //   } catch (err) {
-    //     console.error("Route fetch failed:", err);
-    //   }
-    // })();
-
-    //For this current test, use two dummy coordinate of start and end
-    setRouteCoords([start, end]);
-  }, [start, end]);
+    const startCoord = { latitude: 43.6426, longitude: -79.3871 }; // CN Tower
+    const endCoord = { latitude: 43.6465, longitude: -79.4637 }; // High Park
+    setStart(startCoord);
+    setEnd(endCoord);
+    setRouteCoords([startCoord, endCoord]);
+  }, []);
 
   // 4) Loading / fallback states
   if (Platform.OS === "web") {

@@ -1,16 +1,18 @@
-**Solutions to EcoRoute Mobile App Test**
+# EcoRoute Mobile App
 
 ## Quick Start
 
 ### 1. install
 
-- Choose mobile framework: **React Native (Expo CLI)**
+- Choose mobile framework:
+
+  **React Native (Expo CLI)**
 
 - Start a new project:
 
   `npx create-expo-app EcoRouteMobile`
 
-  (note: not to use `npx expo init EcoRouteMobile`, for expo init is not supported in the local CLI, please use npx create-expo-app instead)
+  (note: not to use `npx expo init EcoRouteMobile`, for expo init is not supported in the local CLI, please use `npx create-expo-app` instead)
 
 - Install required packages:
 
@@ -22,9 +24,9 @@
 
 - Verify the blank app runs on an Android emulator (Android Studio -> Virtual Device Manager):
 
-  `npx expo start`
+  `npx expo start` or `npx expo start --android`
 
-#### Screenshots
+#### Screenshots - the blank app
 
 <img src="/screenshots/screenshot1-1.png" style="width:35%; height:35%;">
 <img src="/screenshots/screenshot1-2.png" style="width:35%; height:35%;">
@@ -47,7 +49,7 @@ No mock server used
 
 ### 2. loading method for routes.json
 
-`/services/routeService.ts`
+in `/services/routeService.ts`
 
 direct import: `import routes from "@/assets/routes.json";`
 
@@ -71,20 +73,20 @@ direct import: `import routes from "@/assets/routes.json";`
 
 ### 3. structure
 
-I organized the project as follows:
+The project is organized as follows:
 
 ```text
 /app          # Input(i.e. index), Results, Map
 /assets       # routes.json, icons
-/components   # reusable UI widgets
 /services     # route fetching logic
+/components   # reusable UI widgets
 ```
 
-#### Short screen recording
+#### Short screen recording - EcoRoute Mobile App
 
-[Watch App Demo Video](https://drive.google.com/file/d/10gY1nC19iTkVvb7h1Z_SypJW-CtSf9aX/view?usp=drive_link)
+[Watch App Demo Video](https://drive.google.com/file/d/1F8_BnH10MoeTyRfeSBeEunUcXTUFJWe8/view?usp=drive_link)
 
-#### Screenshots
+#### Screenshots - EcoRoute Mobile App
 
 <img src="/screenshots/screenshot2.png" style="width:35%; height:35%;">
 <img src="/screenshots/screenshot3.png" style="width:35%; height:35%;">
@@ -92,7 +94,7 @@ I organized the project as follows:
 <img src="/screenshots/screenshot5.png" style="width:35%; height:35%;">
 <img src="/screenshots/screenshot6.png" style="width:35%; height:35%;">
 
-Start/end markers can be clicked to display the address or the place name the user entered as title.
+The Start or End marker can be clicked to display the address or the place name the user entered as its title.
 <img src="/screenshots/screenshot7.png" style="width:35%; height:35%;">
 
 ---
@@ -127,4 +129,4 @@ To evolve EcoRoute from a prototype into a production-grade application, several
 
 ---
 
-**End of Solutions to EcoRoute Mobile App Test**
+**The End**
